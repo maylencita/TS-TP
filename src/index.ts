@@ -44,19 +44,27 @@ type Serveur = {
   messages : Message[]
 }
 
-
-function initServeur(s: Serveur, superUtilisateur: Utilisateur){
-  s.utilisateurs = [];
-  s.channels = [];
-  s.messages = [];
-  s.utilisateurs.push(superUtilisateur);
-}
-
-// superUtilisateur = {pseudo : "super", statut : "Deconnecte", points : 5};
-
 //--------------------------
 // FONCTIONS
 //-------------------------
+
+function initServeur(s: Serveur, superUtilisateur: Utilisateur){
+  if (superUtilisateur.points == 5)
+    s.utilisateurs = []
+    s.channels = []
+    s.messages = []
+    s.utilisateurs.push(superUtilisateur)
+  return s
+}
+
+function ajoutUtilisateurChannel(c: Channel, u: Utilisateur){
+  if (u.points >= 2)
+    if (c.participants.indexOf(u) == -1)
+      (c.participants.push(u))
+  return c
+}
+
+// superUtilisateur = {pseudo : "super", statut : "Deconnecte", points : 5};
 
 function enregUtilisateur(s: Serveur, u: Utilisateur) {
   if (s.utilisateurs.indexOf(u) == -1)
