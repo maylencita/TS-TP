@@ -49,18 +49,30 @@ type Serveur = {
 //-------------------------
 
 function enregUtilisateur(s: Serveur, u: Utilisateur) {
-  if (s.utilisateurs.indexOf(u) == -1)
+  if (s.utilisateurs.indexOf(u) == -1) {
     s.utilisateurs.push(u)
+    return s
+  }
 }
 
 function marquerUtilisateurConnecte(s: Serveur, u: Utilisateur) {
-  if (s.utilisateurs.indexOf(u) > -1)
+  if (s.utilisateurs.indexOf(u) > -1) {
     u.statut = "Connecte"
+    return s
+  }
 }
 
 function creerChannel(s: Serveur, u: Utilisateur, n: string) {
-  if (u.points >= 1)
+  if (u.points >= 1) {
     s.channels.push({nom: n, createur: u, participants: [], messages: []})
+    return s
+  }
+}
+
+function lireMessages(s: Serveur, u: Utilisateur, c: Channel) {
+  if (c.participants.indexOf(u) > -1 || c.createur == u) {
+    return c.messages
+  }
 }
 
 //--------------------------
