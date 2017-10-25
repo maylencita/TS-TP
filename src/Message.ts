@@ -1,5 +1,5 @@
 export class Message {
-    question?: string;
-    reponse?: string;
-    note?: string;
+    private question?: string;
+    private reponse?: string;
+    private note?: string;
 }

@@ -1,5 +1,5 @@
 export enum Status {
-    connecte,
-    deconnecte,
-    suspendu
+    Connecte = "Connecte",
+    Deconnecte = "Deconnecte",
+    Suspendu = "Suspendu"
 }

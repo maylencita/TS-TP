@@ -5,5 +5,5 @@ export class Channel {
     private nom: string;
     private createur: Utilisateur;
     private participants: Utilisateur[];
-    private messages: Message;
+    private messages: Message[];
 }
