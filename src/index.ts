@@ -1,11 +1,16 @@
 import { Server } from "./Server";
+import { Status } from "./Status";
 
 let server: Server;
 server = new Server();
 
 console.log('Application started!');
-server.register("Elisa");
+server.register("Elisa", Status.Deconnecte);
 console.log(server.getUtilisateurs());
+server.connecterUtilisateur("Elisa");
+console.log(server.getUtilisateurs());
+
+
 
 
 //--------------------------

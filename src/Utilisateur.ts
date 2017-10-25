@@ -2,7 +2,7 @@ import { Status } from "./Status";
 
 export class Utilisateur {
     public pseudo: string;
-    private status: Status;
+    public status: Status;
     private points: number;
 
 
@@ -10,6 +10,10 @@ export class Utilisateur {
         this.pseudo = pseudo;
         this.status = status;
         this.points = points;
+    }
+
+    setStatus(s: Status) {
+        this.status = s;
     }
 
 }
