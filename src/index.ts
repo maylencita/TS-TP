@@ -48,15 +48,31 @@ type Serveur = {
 // FONCTIONS
 //-------------------------
 
+function utilisateurEnregistre(s: Serveur, u: Utilisateur) {
+  return s.utilisateurs.indexOf(u) > -1
+}
+
+function appartenanceUtilisateurChannel(u: Utilisateur, c: Channel) {
+  return c.participants.indexOf(u) > -1
+}
+
+function appartenanceMessageChannel(c: Channel, m: Message) {
+  return c.messages.indexOf(m) > -1
+}
+
+function scoreMinimal(u: Utilisateur, s: number) {
+  return u.points >= s
+}
+
 function enregUtilisateur(s: Serveur, u: Utilisateur) {
-  if (s.utilisateurs.indexOf(u) == -1) {
+  if (!utilisateurEnregistre(s, u)) {
     s.utilisateurs.push(u)
     return s
   }
 }
 
 function marquerUtilisateurConnecte(s: Serveur, u: Utilisateur) {
-  if (s.utilisateurs.indexOf(u) > -1) {
+  if (utilisateurEnregistre(s, u)) {
     u.statut = "Connecte"
     return s
   }
@@ -69,10 +85,20 @@ function creerChannel(s: Serveur, u: Utilisateur, n: string) {
   }
 }
 
-function lireMessages(s: Serveur, u: Utilisateur, c: Channel) {
-  if (c.participants.indexOf(u) > -1 || c.createur == u) {
+function lireMessages(u: Utilisateur, c: Channel) {
+  if (appartenanceUtilisateurChannel(u, c)) {
     return c.messages
   }
+}
+
+function envoyerQuestion(u: Utilisateur, c: Channel, t: string) {
+  if (appartenanceUtilisateurChannel(u, c)) {
+    c.messages.push({auteur: u, contenu: t})
+}
+
+function repondreAQuestion(u: Utilisateur, c: Channel, q: Question, t: string) {
+  if (appartenanceUtilisateurChannel(u, c) && appartenanceMessageChannel(c, q)) {
+    c.messages.push({auteur: u, question:q, contenu: t})
 }
 
 //--------------------------
