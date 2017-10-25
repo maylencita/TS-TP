@@ -48,6 +48,8 @@ type Serveur = {
 // FONCTIONS
 //-------------------------
 
+// Fonctions annexes
+
 function utilisateurEnregistre(s: Serveur, u: Utilisateur) {
   return s.utilisateurs.indexOf(u) > -1
 }
@@ -64,12 +66,16 @@ function scoreMinimal(u: Utilisateur, s: number) {
   return u.points >= s
 }
 
+// Fonctions serveur
+
 function enregUtilisateur(s: Serveur, u: Utilisateur) {
   if (!utilisateurEnregistre(s, u)) {
     s.utilisateurs.push(u)
     return s
   }
 }
+
+// Fonctions statut
 
 function marquerUtilisateurConnecte(s: Serveur, u: Utilisateur) {
   if (utilisateurEnregistre(s, u)) {
@@ -78,8 +84,24 @@ function marquerUtilisateurConnecte(s: Serveur, u: Utilisateur) {
   }
 }
 
+function marquerUtilisateurDeconnecte(s: Serveur, u: Utilisateur) {
+  if (utilisateurEnregistre(s, u)) {
+    u.statut = "Deconnecte"
+    return s
+  }
+}
+
+function marquerUtilisateurSuspendu(s: Serveur, u: Utilisateur) {
+  if (utilisateurEnregistre(s, u)) {
+    u.statut = "Suspendu"
+    return s
+  }
+}
+
+// Fonctions channels
+
 function creerChannel(s: Serveur, u: Utilisateur, n: string) {
-  if (u.points >= 1) {
+  if (scoreMinimal(u, 1)) {
     s.channels.push({nom: n, createur: u, participants: [], messages: []})
     return s
   }
@@ -90,6 +112,8 @@ function lireMessages(u: Utilisateur, c: Channel) {
     return c.messages
   }
 }
+
+// Fonctions messages
 
 function envoyerQuestion(u: Utilisateur, c: Channel, t: string) {
   if (appartenanceUtilisateurChannel(u, c)) {
