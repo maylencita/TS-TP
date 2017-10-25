@@ -66,15 +66,6 @@ function scoreMinimal(u: Utilisateur, s: number) {
   return u.points >= s
 }
 
-// Fonctions serveur
-
-function enregUtilisateur(s: Serveur, u: Utilisateur) {
-  if (!utilisateurEnregistre(s, u)) {
-    s.utilisateurs.push(u)
-    return s
-  }
-}
-
 // Fonctions statut
 
 function marquerUtilisateurConnecte(s: Serveur, u: Utilisateur) {
@@ -94,6 +85,22 @@ function marquerUtilisateurDeconnecte(s: Serveur, u: Utilisateur) {
 function marquerUtilisateurSuspendu(s: Serveur, u: Utilisateur) {
   if (utilisateurEnregistre(s, u)) {
     u.statut = "Suspendu"
+    return s
+  }
+}
+
+// Fonctions serveur
+
+function enregUtilisateur(s: Serveur, u: Utilisateur) {
+  if (!utilisateurEnregistre(s, u)) {
+    s.utilisateurs.push(u)
+    return s
+  }
+}
+
+function suspendreUtilisateur(s: Serveur, u: Utilisateur, us: Utilisateur) {
+  if (scoreMinimal(u, 5) && utilisateurEnregistre(s, us)) {
+    s.utilisateurs.push(u)
     return s
   }
 }
