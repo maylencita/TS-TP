@@ -64,6 +64,20 @@ function ajoutUtilisateurChannel(c: Channel, u: Utilisateur){
   return c
 }
 
+function noterQuestion(q: Question, u: Utilisateur, c: Channel) {
+  if (c.messages.indexOf(q) > -1 && c.participants.indexOf(u) > -1 && q.auteur.points < 5)
+    q.auteur.points ++
+}
+
+function noterReponse(r: Reponse, u: Utilisateur, c: Channel) {
+  if (c.messages.indexOf(r.question) > -1 && c.participants.indexOf(u) > -1 && r.auteur.points < 5)
+    r.auteur.points ++
+}
+
+function calculPointsUtilisateur(u: Utilisateur) {
+  return u.points
+}
+
 // superUtilisateur = {pseudo : "super", statut : "Deconnecte", points : 5};
 
 function enregUtilisateur(s: Serveur, u: Utilisateur) {
