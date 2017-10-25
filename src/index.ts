@@ -1,4 +1,12 @@
-console.log('Application started!')
+import { Server } from "./Server";
+
+let server: Server;
+server = new Server();
+
+console.log('Application started!');
+server.register("Elisa");
+console.log(server.getUtilisateurs());
+
 
 //--------------------------
 // TESTING THE APPLICATION
