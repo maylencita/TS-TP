@@ -1,4 +1,4 @@
-console.log('Application started!')
+import * as test from './tests'
 
 //--------------------------
 // TESTING THE APPLICATION
@@ -22,3 +22,5 @@ console.log('Application started!')
   }
 )
 */
+
+test.initAppSpec()
