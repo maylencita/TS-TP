@@ -1,7 +1,7 @@
 console.log('Application started!')
 
 //--------------------------
-// APPLICATION
+// MODELE
 //-------------------------
 
 type Utilisateur = {
@@ -53,6 +53,25 @@ function initServeur(s: Serveur, superUtilisateur: Utilisateur){
 }
 
 // superUtilisateur = {pseudo : "super", statut : "Deconnecte", points : 5};
+
+//--------------------------
+// FONCTIONS
+//-------------------------
+
+function enregUtilisateur(s: Serveur, u: Utilisateur) {
+  if (s.utilisateurs.indexOf(u) == -1)
+    s.utilisateurs.push(u)
+}
+
+function marquerUtilisateurConnecte(s: Serveur, u: Utilisateur) {
+  if (s.utilisateurs.indexOf(u) > -1)
+    u.statut = "Connecte"
+}
+
+function creerChannel(s: Serveur, u: Utilisateur, n: string) {
+  if (u.points >= 1)
+    s.channels.push({nom: n, createur: u, participants: [], messages: []})
+}
 
 //--------------------------
 // TESTING THE APPLICATION
