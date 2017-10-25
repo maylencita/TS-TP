@@ -1,4 +1,6 @@
 import * as test from './tests'
+import * as services from './services'
+import * as models from './models'
 
 //--------------------------
 // TESTING THE APPLICATION
@@ -24,3 +26,8 @@ import * as test from './tests'
 */
 
 test.initAppSpec()
+
+const state = services.initApp()
+const newUser: models.User = {pseudo: "toto", points: 0, status: 'Connected'}
+console.log('state1: ', services.registerUser(state, newUser))
+console.log('state0: ', state)

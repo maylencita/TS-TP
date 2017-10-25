@@ -10,6 +10,13 @@ export function initApp(): ServerState {
   }
 } 
 
+export function registerUser(state: ServerState, user: User): ServerState {
+  return {
+    ...state,
+    users: [...state.users, user]
+  }
+}
+
 // function registerUser(state: {}, user: User){} //We always pass server state
 // function createChannel(user: User, contexte: {}, nom: string){} //Crée un chanel sans participants. Vérifier points >= 1
 // function inviteUser(user: User, contexte: {}, nomChannel: string, upserPseudo: string) {} //Vérifier user is owner ou points >= 2; Ajoute un utilisateur à un channel
