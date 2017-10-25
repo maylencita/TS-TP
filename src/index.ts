@@ -44,6 +44,16 @@ type Serveur = {
   messages : Message[]
 }
 
+
+function initServeur(s: Serveur, superUtilisateur: Utilisateur){
+  s.utilisateurs = [];
+  s.channels = [];
+  s.messages = [];
+  s.utilisateurs.push(superUtilisateur);
+}
+
+// superUtilisateur = {pseudo : "super", statut : "Deconnecte", points : 5};
+
 //--------------------------
 // TESTING THE APPLICATION
 //-------------------------
