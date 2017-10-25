@@ -1,42 +1,42 @@
-type Utilisateur = {
-    pseudo: string
+export type Utilisateur = {
+    pseudo: String
     status: Status 
     points: number
 }
 
-type Status = "Connecte" | "Deconnecte" | "Suspendu"
+export type Status = "Connecte" | "Deconnecte" | "Suspendu"
 
-type Message = Question | Reponse | Note
+export type Message = Question | Reponse | Note
 
-type Question = {
+export type Question = {
     id: number,
-    contenu: string, 
+    contenu: String, 
     emetteur: Utilisateur, 
     destination: Channel[]
 }
 
-type Reponse = {
+export type Reponse = {
     id: number,
-    contenu: string, 
+    contenu: String, 
     emetteur: Utilisateur, 
     idQuestion: number
 }
 
-type Note = {
+export type Note = {
     id: number,
     contenu: number, 
     emetteur: Utilisateur, 
     idSource: number
 }
 
-type Channel = {
-    nom: string, 
+export type Channel = {
+    nom: String, 
     createur: Utilisateur, 
     participants: Utilisateur[],
     messages: number[]
 }
 
-type Serveur = {
+export type Serveur = {
     utilisateurs: Utilisateur[], 
     channels: Channel[], 
     messages: Message[]
