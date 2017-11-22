@@ -7,11 +7,12 @@ export class Server {
     private utilisateurs: Utilisateur[];
     private channels: Channel[];
     private messages: Message[];
-    // private server: Server;
 
     constructor() {
         this.utilisateurs = [];
         this.utilisateurs.push(new Utilisateur("SuperUtilisateur", Status.Connecte, 5));
+        this.messages = [];
+        this.channels = [];
     }
 
     register(pseudo: string, status: Status = Status.Connecte): void {
@@ -46,6 +47,30 @@ export class Server {
             this.utilisateurs[this.getIndeoxOfUtilisateur(p)].setStatus(Status.Connecte);
         }
     }
-    
-    
+
+    createChannel(nom: string, pseudo: string): void {
+        let userPointPositive: boolean = false;
+        let utilisateur: Utilisateur;
+        for (let u of this.utilisateurs) {
+            if(u.pseudo === pseudo) {
+                userPointPositive = (u.getPoints() >= 1)
+                utilisateur = u;
+            }
+        }
+        if (userPointPositive) {
+            this.channels.push(new Channel(nom, utilisateur))
+        }
+        else {
+            console.log("L'utilisateur ", pseudo," n'a pas les droits suffisants");
+        }
+    }
+
+    getChannels(): string[] {
+        let listeChannels = [];
+        for (let elem of this.channels) {
+            listeChannels.push(elem.getNom()+ " créé par " + elem.getCreateur());
+        }
+        return listeChannels;
+    }
+
 }

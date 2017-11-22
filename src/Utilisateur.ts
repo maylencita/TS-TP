@@ -16,4 +16,8 @@ export class Utilisateur {
         this.status = s;
     }
 
+    getPoints(): number {
+        return this.points;
+    }
+
 }

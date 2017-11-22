@@ -9,7 +9,11 @@ server.register("Elisa", Status.Deconnecte);
 console.log(server.getUtilisateurs());
 server.connecterUtilisateur("Elisa");
 console.log(server.getUtilisateurs());
-
+server.register('Loic');
+console.log(server.getUtilisateurs());
+server.createChannel('Channel de Elisa','Elisa')
+server.createChannel('Channel du SuperUtilisateur','SuperUtilisateur')
+console.log(server.getChannels());
 
 
 
