@@ -10,6 +10,7 @@
 
 class ServerState{
   users: User[];
+  channels : Channel[];
   messages: Message[]
 }
 
@@ -21,22 +22,16 @@ class User {
 
 class Message{
   content:string
-  //  = "a question"| "a response" | "a note"
 }
 
 class Channel{
   name : string;
   creator : string;
-  participantsList : [User];
-  messages : [Message]
+  participants? : User[];
+  messages? : Message[]
   user : User;
 }
 
-class Server{
-  users : User[];
-  channels : Channel[];
-  messages : Message[];
-}
 //--------------------------
 // SERVICES
 //-------------------------
@@ -53,19 +48,38 @@ function initState(): ServerState {
     users: [superUser],
     channels:[] as Channel[],
     messages:[] as Message[],
-
   };
 
   return newServer;
 };
 
 
+function registerUser(state: ServerState, user: User): ServerState{
+  state.users.push(user)
+  return state;
+} 
+//We always pass server state
 
-// function registerUser(state: ServerState, user: User): ServerState //We always pass server state
+function createChannel (user: User): Channel{
+  if (user.points >= 1){
+    const newChannel:Channel = {
+      name : "new Channel",
+      creator : "Channel Creator",
+      user : user,
+    }
+    return newChannel;
+  }
+  return null;
+}
+//Crée un chanel sans participants. Vérifier points >= 1
 
-// function createChannel //Crée un chanel sans participants. Vérifier points >= 1
-
-// function inviteUser //Vérifier user is owner ou points >= 2; Ajoute un utilisateur à un channel
+function inviteUser(channel:Channel, user:User){
+  if(channel.user == user || user.points>=2){
+    channel.participants.push(user)
+  }
+}
+//Vérifier user is owner ou points >= 2; 
+// Ajoute un utilisateur à un channel
 
 // readChannel //Vérifier appartennance 
 

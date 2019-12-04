@@ -15,15 +15,15 @@ var User = /** @class */ (function () {
     }
     return User;
 }());
+var Message = /** @class */ (function () {
+    function Message() {
+    }
+    return Message;
+}());
 var Channel = /** @class */ (function () {
     function Channel() {
     }
     return Channel;
-}());
-var Server = /** @class */ (function () {
-    function Server() {
-    }
-    return Server;
 }());
 //--------------------------
 // SERVICES
@@ -35,14 +35,33 @@ function initState() {
         points: 5
     }; //status: 'Connected', points: 5
     var newServer = {
-        users: [superUser]
+        users: [superUser],
+        channels: [],
+        messages: []
     };
     return newServer;
 }
 ;
-// function registerUser(state: ServerState, user: User): ServerState //We always pass server state
-// function createChannel //Crée un chanel sans participants. Vérifier points >= 1
-// function inviteUser //Vérifier user is owner ou points >= 2; Ajoute un utilisateur à un channel
+function registerUser(state, user) {
+    state.users.push(user);
+    return state;
+}
+//We always pass server state
+function createChannel(user) {
+    if (user.points >= 1) {
+        var newChannel = {
+            name: "new Channel",
+            creator: "Channel Creator",
+            user: user
+        };
+        return newChannel;
+    }
+    return null;
+}
+//Crée un chanel sans participants. Vérifier points >= 1
+function inviteUser() {
+}
+//Vérifier user is owner ou points >= 2; Ajoute un utilisateur à un channel
 // readChannel //Vérifier appartennance 
 // sendQuestion //Vérifier appartennance; if points ==0 then add 1 point to user
 // sendAnswer //Vérifier appartennance ou super user && points >= 3
