@@ -9,27 +9,57 @@
 // TODO complete
 
 class ServerState{
-  users: [User];
+  users: User[];
+  messages: Message[]
 }
 
 class User {
   pseudo: string;
+  status: 'Connected'|"Deconnected"|"Suspend";
+  points: 0|1|2|3|4|5;
 }
 
+class Message{
+  content:string
+  //  = "a question"| "a response" | "a note"
+}
 
+class Channel{
+  name : string;
+  creator : string;
+  participantsList : [User];
+  messages : [Message]
+  user : User;
+}
+
+class Server{
+  users : User[];
+  channels : Channel[];
+  messages : Message[];
+}
 //--------------------------
 // SERVICES
 //-------------------------
 
 function initState(): ServerState {
-  const superUser: User = { pseudo: 'admin' } //status: 'Connected', points: 5
+  const superUser: User = { 
+    pseudo: 'admin', 
+    status: 'Connected',
+    points: 5
+
+  } //status: 'Connected', points: 5
 
   let newServer: ServerState = {
-    users: [superUser]
+    users: [superUser],
+    channels:[] as Channel[],
+    messages:[] as Message[],
+
   };
 
   return newServer;
 };
+
+
 
 // function registerUser(state: ServerState, user: User): ServerState //We always pass server state
 
@@ -55,4 +85,11 @@ function initState(): ServerState {
 // TESTING THE APPLICATION
 //-------------------------
 
-document.body.textContent = "Hello !";
+(function(){
+  const server = initState();
+
+  document.body.textContent = server.users.map(user => "Hello ! " + user.pseudo)
+  .reduce((acc,u)=>acc + " " + undefined, '');
+})
+
+// document.body.textContent = "Hello !";
