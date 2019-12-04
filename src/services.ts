@@ -1,21 +1,21 @@
-import { ServerState, User, Message, Question, Answer, Note, Channel} from './models'
+// import { ServerState, User, Message, Question, Answer, Note, Channel} from './models'
 
-export function initApp(): ServerState {
-  const superUser: User = { pseudo: 'admin', status: 'Connected', points: 5}
+// export function initApp(): ServerState {
+//   const superUser: User = { pseudo: 'admin', status: 'Connected', points: 5}
 
-  return {
-    users: [superUser],
-    channels: [],
-    messages: []
-  }
-} 
+//   return {
+//     users: [superUser],
+//     channels: [],
+//     messages: []
+//   }
+// } 
 
-export function registerUser(state: ServerState, user: User): ServerState {
-  return {
-    ...state,
-    users: [...state.users, user]
-  }
-}
+// export function registerUser(state: ServerState, user: User): ServerState {
+//   return {
+//     ...state,
+//     users: [...state.users, user]
+//   }
+// }
 
 // function registerUser(state: {}, user: User){} //We always pass server state
 // function createChannel(user: User, contexte: {}, nom: string){} //Crée un chanel sans participants. Vérifier points >= 1
