@@ -5,39 +5,27 @@
 // MODEL
 //-------------------------
 // TODO complete
-var ServerState = /** @class */ (function () {
-    function ServerState() {
-    }
-    return ServerState;
-}());
-var User = /** @class */ (function () {
-    function User() {
-    }
-    return User;
-}());
-var Message = /** @class */ (function () {
-    function Message() {
-    }
-    return Message;
-}());
-var Channel = /** @class */ (function () {
-    function Channel() {
-    }
-    return Channel;
-}());
+class ServerState {
+}
+class User {
+}
+class Message {
+}
+class Channel {
+}
 //--------------------------
 // SERVICES
 //-------------------------
 function initState() {
-    var superUser = {
+    const superUser = {
         pseudo: 'admin',
         status: 'Connected',
         points: 5
     }; //status: 'Connected', points: 5
-    var newServer = {
+    let newServer = {
         users: [superUser],
         channels: [],
-        messages: []
+        messages: [],
     };
     return newServer;
 }
@@ -49,32 +37,58 @@ function registerUser(state, user) {
 //We always pass server state
 function createChannel(user) {
     if (user.points >= 1) {
-        var newChannel = {
+        const newChannel = {
             name: "new Channel",
             creator: "Channel Creator",
-            user: user
+            user: user,
         };
         return newChannel;
     }
     return null;
 }
 //Crée un chanel sans participants. Vérifier points >= 1
-function inviteUser() {
+function inviteUser(channel, user) {
+    if (channel.user == user || user.points >= 2) {
+        channel.participants.push(user);
+        return true;
+    }
+    return false;
 }
-//Vérifier user is owner ou points >= 2; Ajoute un utilisateur à un channel
-// readChannel //Vérifier appartennance 
-// sendQuestion //Vérifier appartennance; if points ==0 then add 1 point to user
-// sendAnswer //Vérifier appartennance ou super user && points >= 3
-// noteQuestion //Vérifier appartenance && points >= 1 ; récalculer points
+//Vérifier user is owner ou points >= 2; 
+// Ajoute un utilisateur à un channel
+function readChannel(channel) {
+    console.log(channel.name);
+    console.log(channel.creator);
+    console.log(channel.participants);
+    console.log(channel.messages);
+    console.log(channel.user);
+}
+//Vérifier appartennance 
+function sendQuestion(user) {
+    if (user.points == 0) {
+        user.points++;
+        return true;
+    }
+    return false;
+}
+//Vérifier appartennance; if points ==0 then add 1 point to user
+function sendAnswer(channel, user) {
+    if (channel.user == user && user.points >= 3) {
+        return true;
+    }
+    return false;
+} //Vérifier appartennance ou super user && points >= 3
+function noteQuestion() {
+} //Vérifier appartenance && points >= 1 ; récalculer points
 // noteAnswer //Vérifier appartenance && points >= 2 ; récalculer points
 // suspendUser // only super users (5 points) peuvent suspendre un utilisateur
 // calculerPoints // selon la notation de ces questions / responses
 //--------------------------
 // TESTING THE APPLICATION
 //-------------------------
-(function () {
-    var server = initState();
-    document.body.textContent = server.users.map(function (user) { return "Hello ! " + user.pseudo; })
-        .reduce(function (acc, u) { return acc + " " + undefined; }, '');
-});
-// document.body.textContent = "Hello !";
+// (function(){
+//   const server = initState();
+//   document.body.textContent = server.users.map(user => "Hello ! " + user.pseudo)
+//   .reduce((acc,u)=>acc + " " + undefined, '');
+// })
+document.body.textContent = "Hello !";
